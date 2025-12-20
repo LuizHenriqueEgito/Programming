@@ -1,0 +1,1 @@
+; clojure tenta ser imutavel naquilo que faz

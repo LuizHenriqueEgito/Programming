@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 /*
 ​1 - Apresentação do Jogador
 Crie um programa que peça o primeiro nome de um jogador,
@@ -84,3 +86,113 @@ Com base na taxa de ocupação do estádio, o programa deve classificar a partid
 ✅ Se estiver entre 50% e 70% (inclusive): "Público razoável."
 ✅ Se estiver abaixo de 50%: "Morumbis"
 */
+int main() {
+    // EXERCICIO 1
+    char nome[10];
+    int idade;
+    int qtde_gols;
+    printf("EXERCICIO I\n");
+    printf("Digite seu nome:\n");
+    scanf("%9s", nome);
+    printf("Digite sua idade:\n");
+    scanf("%d", &idade);
+    printf("Quantidade de gols feitos:\n");
+    scanf("%d", &qtde_gols);
+    printf("Jogador: %s | idade: %d | Qtde Gols: %d\n\n", nome, idade, qtde_gols);
+
+    // EXERCICIO 2
+    printf("EXERCICIO II\n");
+    int n_partidas;
+    printf("Quantas partidas você jogou?\n");
+    scanf("%d", &n_partidas);
+    float media_gols_partida = (float)qtde_gols / n_partidas;
+    printf("Média de gols por parida: %.2f\n\n", media_gols_partida);
+
+    printf("EXERCICIO III\n");
+    int tempo_jogo;
+    printf("Digite o seu tempo de jogo em minutos:");
+    scanf("%d", &tempo_jogo);
+    int horas = tempo_jogo / 60;
+    int minutos = tempo_jogo % 60;
+    printf("Horas jogadas: %d | Minutos jogados: %d\n\n", horas, minutos);
+
+    printf("EXERCICIO IV\n");
+    int resultados_partida[3];
+    printf("Coloque na respectiva ordem, o número de vitórias, de empates e de derrotas do seu time: ");
+    scanf(
+        "%d, %d, %d",
+        &resultados_partida[0],
+        &resultados_partida[1],
+        &resultados_partida[2]
+    );
+    int pontos = 3 * resultados_partida[0] + resultados_partida[1];
+    printf("Seu time fez %d pontos", pontos);
+
+    printf("\nEXERCICIO V\n");
+    int income_jogador_a;
+    int income_jogador_b;
+    printf("Qual o salário do jogador A:");
+    scanf("\n%d", &income_jogador_a);
+    printf("Qual o salário do jogador B:");
+    scanf("\n%d", &income_jogador_b);
+    int income_diff = abs(income_jogador_a - income_jogador_b);
+    printf("A diferença salarial entre os jogadores é %d", income_diff);
+
+    printf("\nEXERCICIO VI\n");
+    int n_cartoes;
+    printf("Quantos cartões o jogador recebeu?");
+    scanf("%d", &n_cartoes);
+    if (n_cartoes > 2) {
+        printf("Este jogador não pode jogar mais!\n");
+    } else {
+        printf("Este jogador ainda está apto para jogar\n");
+    }
+    printf("\nEXERCICIO VII\n");
+    if (idade <= 20) {
+        printf("Pode jogar na sub20\n");
+    } else {
+        printf("Não pode jogar na sub20\n");
+    }
+
+    printf("\nEXERCICIO VIII\n");
+    if (qtde_gols >=  10) {
+        printf("Excelente temporada!\n");
+    } else if (qtde_gols > 5 && qtde_gols < 10) {
+        printf("Boa temporada!\n");
+    } else {
+        printf("Temporada abaixo do esperado.\n");
+    }
+
+    printf("\nEXERCICIO IX\n");
+    if (idade <= 20 && qtde_gols >  10) {
+        printf("Jovem talento promissor!\n");
+    } else if (idade <= 20 && qtde_gols <= 10) {
+        printf("Jovem em desenvolvimento.\n");
+    } else if (idade > 20 && qtde_gols > 15) {
+        printf("Jogador experiente em grande fase!\n");
+    } else {
+        printf("Jogador comum.\n");
+    }
+
+    printf("\nEXERCICIO X\n");
+    int capacidade;
+    int qtde_torcedores;
+    printf("Qual é a capacidade do Estádio?\n");
+    scanf("%d", &capacidade);
+    printf("Qual foi o número de torcedores presente?\n");
+    scanf("%d", &qtde_torcedores);
+
+    float razao = (float)qtde_torcedores / capacidade;
+    printf("Lotação do estadio: %.2f", razao);
+    
+    if (razao > 0.9) {
+        printf("Lotado!");
+    } else if (razao > 0.7 && razao <= 0.9) {
+        printf("Ótima presença de público!");
+    } else if (razao > 0.5 && razao <= 0.7) {
+        printf("Público razoável.");
+    } else {
+        printf("Jogo do cruzeiro");
+    }
+    return 0;
+}

@@ -12,6 +12,11 @@ Clone:
     - pode ter Clone mas não ter o Copy
 */
 
+/* 
+let s1 = String::from("hello")
+O ownership passa a ser s2 e s1 não existe mais
+s2 = s1; -> isso é um move, s1 deixa de existir! e vai para s2
+*/
 fn main() {
     println!("Semântica Copy\n");
     let x: i32 = 5;
