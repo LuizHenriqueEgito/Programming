@@ -1,3 +1,9 @@
+; Exemplo com multiplas variaveis
+;; (let [x 5
+;;       y (+ x 3)
+;;       z (* y 2)]
+;;   z)
+
 (defn valor-multa
   "Calcular valor total incluindo multa"  ; é como uma docString no python
   [valor]

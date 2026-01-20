@@ -58,3 +58,6 @@ são listas.
 - Por isso sempre usamos () no nosso codigo;
 - O `codigo` clojure é um dado, é uma estrutura de dados;
 - Clojure não é uma linguagem funcional pura
+
+## Continue aprendendo
+- [Documentação Getting Started](https://clojure.org/guides/getting_started)
