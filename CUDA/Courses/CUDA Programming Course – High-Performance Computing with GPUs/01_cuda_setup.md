@@ -4,6 +4,12 @@
 ```bash
 wsl --install -d Ubuntu
 ```
+Para abrir o terminal no `windowns` rode:
+```bash
+wsl
+# ou para entrar como root
+wsl -d Ubuntu -u root
+```
 Com isso ele já entra no `Linux`.
 
 # 3º Atualize o Sistema
