@@ -20,10 +20,17 @@ sudo apt install python3-pip
 ```
 # 4º Installe o CUDA Toolkit
 ```bash
+# cuda 13
 wget https://developer.download.nvidia.com/compute/cuda/13.1.1/local_installers/cuda_13.1.1_590.48.01_linux.run
+# cuda 12
+wget https://developer.download.nvidia.com/compute/cuda/12.0.0/local_installers/cuda_12.0.0_525.60.13_linux.run
 
 # ao dar o run vai abrir um menu
+# cuda 13
 sudo sh cuda_13.1.1_590.48.01_linux.run
+# cuda 12
+sudo sh cuda_12.0.0_525.60.13_linux.run
+
 # vá na opção de install e em seguida adicione ao PATH
 export PATH=/usr/local/cuda-13.1/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda-13.1/lib64:$LD_LIBRARY_PATH
