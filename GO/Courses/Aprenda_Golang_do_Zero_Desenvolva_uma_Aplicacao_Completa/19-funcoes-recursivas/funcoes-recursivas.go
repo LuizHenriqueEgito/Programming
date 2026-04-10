@@ -8,6 +8,7 @@ func fibonacci(posicao uint) uint {
 	}
 	return fibonacci(posicao-2) + fibonacci(posicao-1)
 }
+
 func main() {
 	fmt.Println("Funções Recursivas")
 	posicao := uint(15)

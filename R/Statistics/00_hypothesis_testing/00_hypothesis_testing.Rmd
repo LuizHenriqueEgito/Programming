@@ -1,0 +1,140 @@
+---
+title: "Teste T: Comparação Entre Grupos"
+author: "Egito"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+  theme: flatly
+toc: true
+toc_float: true
+code_folding: show
+highlight: tango
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 8,
+  fig.height = 5,
+  fig.align = 'center'
+)
+```
+
+## Bibliotecas
+
+Carregando as bibliotecas necessárias para análise:
+```{r libraries}
+library(dplyr)
+library(ggplot2)
+```
+
+## Configuração
+
+Definindo seed para reprodutibilidade:
+```{r settings}
+set.seed(42)
+```
+
+## Criação dos Dados
+
+Gerando dois grupos aleatórios com distribuição normal:
+  
+  - **Grupo A:** média = 50, desvio padrão = 10
+- **Grupo B:** média = 55, desvio padrão = 10
+```{r criar-dados}
+# Cria dois grupos aleatórios
+grupo_a <- rnorm(100, mean = 50, sd = 10)
+grupo_b <- rnorm(100, mean = 55, sd = 10)
+
+# Faz o DataFrame com eles
+dados <- data.frame(
+  valor = c(grupo_a, grupo_b),
+  grupo = rep(c("A", "B"), each = 100)
+)
+
+# Visualiza primeiras linhas
+head(dados)
+```
+
+## Visualização dos Dados
+
+Comparação visual entre os grupos usando boxplot:
+```{r boxplot, fig.cap="Figura 1: Distribuição dos valores por grupo"}
+ggplot(dados, aes(x = grupo, y = valor, fill = grupo)) +
+  geom_boxplot(alpha = 0.7) +
+  theme_minimal() +
+  labs(
+    title = "Comparação entre grupos",
+    x = "Grupo",
+    y = "Valor"
+  ) +
+  scale_fill_brewer(palette = "Set2")
+```
+
+## Teste T de Student
+
+Realizando o teste t para comparar as médias dos dois grupos:
+  
+**Hipóteses:**
+  
+- **H0 (Hipótese Nula):** Não há diferença significativa entre as médias dos grupos
+- **H1 (Hipótese Alternativa):** Há diferença significativa entre as médias dos grupos
+```{r teste-t}
+# Faz o teste t
+teste <- t.test(valor ~ grupo, data = dados)
+teste
+```
+
+## Interpretação do P-value
+```{r p-value}
+# Pega o p-value
+p_value <- teste$p.value
+cat("P-value:", round(p_value, 4), "\n\n")
+
+# Rejeita ou não rejeitamos H0
+if (p_value < 0.05) {
+  cat("**Conclusão:** Rejeitamos H0\n")
+  cat("Existe diferença significativa entre os grupos (p < 0.05).\n")
+} else {
+  cat("**Conclusão:** Não rejeitamos H0\n")
+  cat("Não há evidência suficiente de diferença (p ≥ 0.05).\n")
+}
+```
+
+## Estatísticas Descritivas
+
+Resumo estatístico por grupo:
+```{r estatisticas}
+estatisticas <- dados %>%
+  group_by(grupo) %>%
+  summarise(
+    media = mean(valor),
+    desvio_padrao = sd(valor),
+    n = n(),
+    mediana = median(valor),
+    min = min(valor),
+    max = max(valor)
+  )
+
+knitr::kable(
+  estatisticas,
+  digits = 2,
+  caption = "Tabela 1: Estatísticas descritivas por grupo",
+  col.names = c("Grupo", "Média", "Desvio Padrão", "N", "Mediana", "Mínimo", "Máximo")
+)
+```
+
+## Resumo
+```{r resumo, echo=FALSE, results='asis'}
+diferenca_medias <- abs(diff(estatisticas$media))
+
+cat("### Resultados Principais\n\n")
+cat("- **Grupo A:** Média =", round(estatisticas$media[1], 2), 
+    "(DP =", round(estatisticas$desvio_padrao[1], 2), ")\n")
+cat("- **Grupo B:** Média =", round(estatisticas$media[2], 2), 
+    "(DP =", round(estatisticas$desvio_padrao[2], 2), ")\n")
+cat("- **Diferença entre médias:**", round(diferenca_medias, 2), "\n")
+cat("- **P-value:**", round(p_value, 4), "\n")
+cat("- **Nível de significância:** α = 0.05\n")
+```
