@@ -1,0 +1,60 @@
+---
+title: "00_get_started"
+author: "Egito"
+date: "2026-04-15"
+output: 
+  md_document:
+    variant: markdown_github
+---
+# Importando o dplyr
+```{r}
+library(dplyr)
+library(readr)
+
+URL = "https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv"
+df <- read_csv(URL)
+df
+```
+# Olhando as primeiras 10 linhas (HEAD)
+```{r}
+df %>%
+  head(5)
+```
+# Fazendo filtros
+```{r}
+df %>%
+  # filtra
+  filter(Survived == 1) %>% 
+  # faz o select de algumas colunas
+  select(Name, Age, Sex, Survived)
+```
+# Adicionando nova coluna (mutate)
+```{r}
+df %>% 
+  mutate(
+    N_Family = SibSp + Parch,
+    Times_Family = SibSp * Parch,
+    Dummy_Sex = ifelse(Sex == "male", 1, 0),
+    Pow_Age = Age ^ 2,
+    Cat_Age = case_when(
+      Sex == "female" & Age < 12 ~ "Prioridade_Maxima",
+      (Sex == "female" & Age >= 12) | (Sex == "male" & Age < 12) ~ "Prioridade_Alta",
+      Sex == "male" & Age < 12 ~ "Prioridade_Media",
+      Sex == "male" & Age >= 12 ~ "Prioridade_Baixa",
+      TRUE ~ "Sem_prioridade"
+    )
+    
+  ) %>% 
+  filter(Times_Family > N_Family) %>% 
+  select(
+    Name,
+    Age,
+    SibSp,
+    Parch,
+    N_Family,
+    Times_Family,
+    Dummy_Sex,
+    Pow_Age,
+    Cat_Age
+  )
+```
