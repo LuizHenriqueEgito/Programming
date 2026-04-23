@@ -1,5 +1,8 @@
-A = [[2, 2], [1, 1]]
-B = [[1, 1], [4, 1]]
+A = [[2, 2],
+     [1, 1]]
+
+B = [[1, 1],
+     [4, 1]]
 
 
 type Matrix = list[list[float], ...]
@@ -10,7 +13,8 @@ type Matrix = list[list[float], ...]
 
 
 def matrix_mul(A: Matrix, B: Matrix) -> Matrix:
-    C = [[0, 0], [0, 0]]
+    C = [[0, 0],
+         [0, 0]]
     n_rows = len(A)
     n_cols = len(B[0])
     n = len(B)
