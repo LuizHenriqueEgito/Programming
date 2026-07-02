@@ -1,4 +1,5 @@
-import Std::Io::PrintLine;
+import Std::Io::{PrintLine, ReadLine};
+import Std::Format;
 
 func Main() -> int {
     PrintLine("Hello, world!");
@@ -9,5 +10,9 @@ func Main() -> int {
         result *= i;
         PrintLine("{}! = {}", i, result);
     }
+
+    PrintLine("Enter a word");
+    let userInput = ReadLine();
+    PrintLine(Format("You typed: {}", userInput));
     return 0;
 }
