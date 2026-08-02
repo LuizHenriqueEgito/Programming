@@ -21,5 +21,5 @@ fn main() {
     match index {
             Some(idx) => println!("index: {} | numero: {}", idx, nums[idx]),
             None => println!("Número não encontrado no array."),
-        }
+    }
 }
