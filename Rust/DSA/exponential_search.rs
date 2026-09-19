@@ -24,9 +24,6 @@ fn binary_search(
 }
 
 fn exponential_search(nums: &[i32], n: i32) -> Option<usize> {
-    if nums.is_empty() {
-        return None;
-    }
     if nums[0] == n {
         return Some(0);
     }
@@ -44,7 +41,7 @@ fn exponential_search(nums: &[i32], n: i32) -> Option<usize> {
 }
 
 fn main() {
-    let nums = [1,2,3,4,5,6,7,8,9];
+    let nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     let index = exponential_search(&nums, 9);
     match index {
         Some(idx) => println!("index: {} | numero: {}", idx, nums[idx]),
